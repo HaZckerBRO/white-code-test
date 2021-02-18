@@ -1,26 +1,33 @@
-import React from 'react';
-import {  Link } from 'react-router-dom';
+import React, { useEffect, Fragment } from 'react';
 import { NewsItem } from '../news-item';
-
 import css from './style.module.scss';
 
 
 
-const View = (props) => {
+const View = ({newsList, getNews}) => {
+
+  useEffect(() => {
+    getNews()
+  }, []);
+
+  function renderNews() {
+    if (!newsList.length) {
+      return null
+    }
+    return newsList.map((newsItem) => (
+      <Fragment key={newsItem.id}>
+        <NewsItem data={newsItem}/>
+      </Fragment>
+    ))
+  }
 
   return (
     <div className={css['news-container']}>
-      <NewsItem />
-      <NewsItem />
-      <NewsItem />
-      <NewsItem />
-      <NewsItem />
-      <NewsItem />
-      <NewsItem />
-      <NewsItem />
-      <NewsItem />
+      { renderNews() }
     </div>
   )
 };
 
 export { View }
+
+
