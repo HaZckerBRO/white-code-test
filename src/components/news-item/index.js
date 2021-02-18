@@ -1,1 +1,1 @@
-export { NewsItem } from './container'
+export { View as NewsItem } from './view'

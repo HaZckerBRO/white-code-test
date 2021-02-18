@@ -3,25 +3,24 @@ import { Link } from 'react-router-dom';
 import css from './style.module.scss';
 
 
-const View = (props) => {
-  const newsTitle = 'News Title';
-  const newsText = 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.';
-  const newsImageUrl = 'https://reqres.in/img/faces/11-image.jpg';
-  const newsId = props.newsId;
+const View = ({data, linkHidden}) => {
+  const { first_name, last_name, email, id, avatar } = data;
+  const linkToDetail = 'news/' + id;
 
   return (
     <div className={`${css['card-news-item']} card mb-3`}>
       <div className="row g-0">
         <div className="col-md-4">
-          <img src={newsImageUrl} alt="..." />
+          <img src={avatar} alt="..." />
         </div>
         <div className="col-md-8">
           <div className="card-body">
-            <h5 className="card-title">{newsTitle}</h5>
-            <p className="card-text">{newsText}</p>
-            {props.linkHidden
-              ? null
-              : <Link to={'news/5'} type="button" className="btn btn-primary">Read</Link>
+            <h5 className="card-title">{id}. {first_name}</h5>
+            <p className="card-text">{first_name} {last_name}</p>
+            <p className="card-text">{email}</p>
+            {linkHidden
+              ? <Link to={'/'} type="button" className="btn btn-primary">Back</Link>
+              : <Link to={linkToDetail} type="button" className="btn btn-primary">Read</Link>
             }
 
           </div>

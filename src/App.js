@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import {
   NewsContainer,
-  NewsItem,
   Modal
 } from './components';
 
@@ -21,20 +20,21 @@ function App() {
           <Route path="/" exact>
             <NewsContainer/>
           </Route>
-          <Route path="/news/:id"
-                 render={({match}) => {
-                   const { id } = match.params;
-                   return (
-                     <Modal>
-                       <NewsItem newsId={id} linkHidden />
-                     </Modal>
-                   )
-                 }}
+          <Route
+            path="/news/:id"
+            render={({match}) => {
+              const {id} = match.params;
+              return (
+                <>
+                  <NewsContainer/>
+                  <Modal target='news' params={id}/>
+                </>
+              )
+            }}
           />
         </Switch>
       </div>
     </Router>
-
   );
 }
 
